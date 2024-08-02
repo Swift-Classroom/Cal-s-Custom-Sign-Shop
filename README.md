@@ -52,3 +52,9 @@ The function should return the cost of the sign as an integer.
 costOf(sign: "Happy Birthday Grandma!")
 // returns 66
 ```
+
+## Documentation
+
+If you need to know more about the argoument see the [documentation](./docs/introduction.md).
+
+If you are stuck, see [hints](./docs/hints)
