@@ -1,79 +1,91 @@
-import XCTest
+//
+//  Test.swift
+//  CustomSigns
+//
+//  Created by Gianluca Orpello on 21/10/24.
+//
 
-@testable import CustomSigns
+import Testing
 
-class TaskStringConstants: XCTestCase {
-  func testBirthday() {
-    XCTAssertEqual(birthday, "Birthday")
-  }
+struct TaskStringConstantsTest {
 
-  func testValentine() throws {
+    @Test func testBirthday() async throws {
+        #expect(birthday == "Birthday")
+    }
     
-    XCTAssertEqual(valentine, "Valentine's Day")
-  }
-
-  func testAnniversary() throws {
+    @Test func testValentine() async throws {
+        #expect(valentine == "Valentine's Day")
+    }
     
-    XCTAssertEqual(anniversary, "Anniversary")
-  }
+    @Test func testAnniversary() async throws {
+        #expect(anniversary == "Anniversary")
+    }
+
 }
 
-class TaskCharacterConstants: XCTestCase {
-  func testSpace() throws {
+struct TaskCharacterConstantsTest {
+    @Test func testSpace() async throws {
+        let result: Character = " "
+        #expect(space == result)
+    }
     
-    XCTAssertEqual(space, " " as Character)
-  }
-
-  func testExclamation() throws {
-    
-    XCTAssertEqual(exclamation, "!" as Character)
-  }
+    @Test func testExclamation() async throws {
+        let result: Character = "!"
+        #expect(exclamation == result)
+    }
 }
 
-class TaskBuildSign: XCTestCase {
-  func testBuildSign() throws {
+struct TaskBuildSignTest {
+    @Test func testBuildSign() async throws {
+        #expect(
+            buildSign(for: valentine, name: "Hikaru") == "Happy Valentine's Day Hikaru!"
+        )
+    }
     
-    XCTAssertEqual(buildSign(for: valentine, name: "Hikaru"), "Happy Valentine's Day Hikaru!")
-  }
-
-  func testBuildSignNoName() throws {
+    @Test func testBuildSignNoName() async throws {
+        #expect(
+            buildSign(for: birthday, name: "") == "Happy Birthday !"
+        )
+    }
     
-    XCTAssertEqual(buildSign(for: birthday, name: ""), "Happy Birthday !")
-  }
-
-  func testBuildSignAnniversary() throws {
-    
-    XCTAssertEqual(buildSign(for: anniversary, name: "Bob"), "Happy Anniversary Bob!")
-  }
+    @Test func testBuildSignAnniversary() async throws {
+        #expect(
+            buildSign(for: anniversary, name: "Bob") == "Happy Anniversary Bob!"
+        )
+    }
 }
 
-class TaskGraduationFor: XCTestCase {
-  func testGraduation() throws {
+struct TaskGraduationForTest {
+    @Test func testGraduation() throws {
+        #expect(
+            graduationFor(name: "Isabel", year: 1988) == "Congratulations Isabel!\nClass of 1988"
+        )
+    }
     
-    XCTAssertEqual(
-      graduationFor(name: "Isabel", year: 1988), "Congratulations Isabel!\nClass of 1988")
-  }
-
-  func testGraduation2005() throws {
-    
-    XCTAssertEqual(
-      graduationFor(name: "Jeremy", year: 2005), "Congratulations Jeremy!\nClass of 2005")
-  }
+    @Test func testGraduation2005() throws {
+        #expect(
+            graduationFor(name: "Jeremy", year: 2005) == "Congratulations Jeremy!\nClass of 2005"
+        )
+    }
 }
 
-class TaskCostOf: XCTestCase {
-  func testCostOfSign() throws {
+struct TaskCostOfTest {
+    @Test func testCostOfSign() throws {
+        #expect(
+            costOf(sign: graduationFor(name: "Isabel", year: 1988)) == 94
+        )
+        XCTAssertEqual(costOf(sign: graduationFor(name: "Isabel", year: 1988)), 94)
+    }
     
-    XCTAssertEqual(costOf(sign: graduationFor(name: "Isabel", year: 1988)), 94)
-  }
-
-  func testBuiltSign() throws {
+    @Test func testBuiltSign() throws {
+        #expect(
+            costOf(sign: buildSign(for: anniversary, name: "Bob")) == 64
+        )
+    }
     
-    XCTAssertEqual(costOf(sign: buildSign(for: anniversary, name: "Bob")), 64)
-  }
-
-  func testCostOfSignEmpty() throws {
-    
-    XCTAssertEqual(costOf(sign: ""), 20)
-  }
+    @Test func testCostOfSignEmpty() throws {
+        #expect(
+            costOf(sign: "") == 20
+        )
+    }
 }
